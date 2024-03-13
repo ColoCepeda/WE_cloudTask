@@ -77,6 +77,9 @@ sudo systemctl enable docker
 
 #8- Instalar MC
 
+echo "Instalando Midnight Commander..."
+sudo apt install mc
+
 #9- Instalar Vim
 
 echo "Instalando Vim..."
@@ -90,9 +93,9 @@ sudo apt install net-tools
 
 #11- Crear user nginx y dar permisos de docker
 
-echo "Instalando Nginx"
-sudo apt-get install nginx -y
+echo "Creando usuario nginx"
 
-
-
+sudo adduser nginx
+sudo usermod -aG docker nginx
+sudo usermod -aG sudo nginx
 
