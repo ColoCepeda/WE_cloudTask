@@ -70,7 +70,6 @@ else
     #Crear grupo y añadir usuarios
 sudo groupadd docker
 sudo usermod -aG docker webexpertosudo
-sudo usermod -aG docker webexpertossh
     #Iniciar el servicio de docker
 sudo systemctl start docker
     #Habilitar el inicio automatico de Docker
@@ -90,6 +89,10 @@ sudo apt install net-tools
 
 
 #11- Crear user nginx y dar permisos de docker
+
+echo "Instalando Nginx"
+sudo apt-get install nginx -y
+
 
 
 
