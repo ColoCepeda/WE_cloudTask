@@ -3,6 +3,34 @@
 # Configuración inicial para Ubuntu Server en DigitalOcean para el Bootcamp de DevOps de Web-Experto
 # Autor: Marcelo Cepeda - Estudiante - marcelo.cepeda17@gmail.com
 
+
+# Función para crear usuarios.
+crear_usuario() {
+    local user="$1"
+    echo "Creando usuario '$user'..."
+    if id "$user" &>/dev/null; then
+        echo "El usuario $user ya existe"
+    else
+        while true; do
+            read -s -p "Ingrese la contraseña para el usuario $user:  " pass
+            echo -e "\n"
+            read -s -p "Confirme contraseña: " pass2
+            echo -e "\n"
+            if [ "$pass" == "$pass2" ]; then
+                break
+            else
+                echo "Las contraseñas no coinciden, inténtelo de nuevo."
+            fi
+        done
+
+        useradd -m "$user"
+        echo "$user:$pass" | chpasswd
+        echo "El usuario $user fue creado exitosamente."
+    fi
+}
+
+echo "Inicia setup para ubuntu server..."
+
 #Actualizar dependencias
 apt update
 apt upgrade -y
@@ -20,19 +48,12 @@ hostnamectl set-hostname bootcampwebexperto
 
 #3- Crear usuario sudo llamado "webexpertosudo"
 
-echo "Creando usuario 'webexpertosudo'..."
-adduser webexpertosudo
-    #Agrego el usuario al grupo sudo para otorgar permisos
+crear_usuario "webexpertosudo"
 usermod -aG sudo webexpertosudo
-echo "Usuario creado: webexpertosudo"
 
 #4- Crear un user para conectarse via ssh
 
-echo "Creando usuario para conexion via SSH..."
-adduser webexpertossh
-    #Agrego el usuario al grupo sudo para otorgar permisos
-usermod -aG sudo webexpertossh
-echo "Usuario creado: webexpertossh "
+crear_usuario webexpertossh
 
 #5- Validar instalacion de docker e instalar
 
@@ -91,12 +112,7 @@ apt install vim
 echo "Instalando Net-Tools"
 apt install net-tools
 
-
 #11- Crear user nginx y dar permisos de docker
 
-echo "Creando usuario nginx"
-
-adduser nginx
+crear_usuario nginx
 usermod -aG docker nginx
-usermod -aG sudo nginx
-
