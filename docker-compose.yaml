@@ -34,11 +34,11 @@ services:
     expose:
       - "80"
     volumes:
-      - /Users/kbs/git/peladonerd/varios/1/www:/usr/share/nginx/html:ro
+      - /Users/webexperto/tup-lc2-votacion-app:/usr/share/nginx/html:ro
     environment:
-      - VIRTUAL_HOST=pablokbs.com,www.pablokbs.com
-      - LETSENCRYPT_HOST=pablokbs.com,www.pablokbs.com
-      - LETSENCRYPT_EMAIL=pablo@pablokbs.com
+      - VIRTUAL_HOST=utnvote.app.com, www.utnvote.app.com
+      - LETSENCRYPT_HOST=utnvote.app.com, www.utnvote.app.com
+      - LETSENCRYPT_EMAIL=marcelo.cepeda17@gmail.com
     depends_on:
       - nginx-proxy
       - letsencrypt
