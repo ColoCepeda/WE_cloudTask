@@ -33,7 +33,6 @@ echo "Inicia setup para ubuntu server..."
 
 #Actualizar dependencias
 apt update
-apt upgrade -y
 
 #1- Configurar zona horaria en Argentina
 
