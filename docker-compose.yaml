@@ -34,7 +34,7 @@ services:
     expose:
       - "80"
     volumes:
-      - /home/marcelo/tupApp:/usr/share/nginx/html:ro
+      - /home/nginx/webApp:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=voteapp.marcelo.com, www.voteapp.marcelo.com
       - LETSENCRYPT_HOST=voteapp.marcelo.com, www.voteapp.marcelo.com
