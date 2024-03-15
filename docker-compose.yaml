@@ -12,7 +12,6 @@ services:
       - certs:/etc/nginx/certs:ro
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - acme:/etc/acme.sh
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -26,24 +25,20 @@ services:
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - acme:/etc/acme.sh
-
+    volumes_from:
+      - nginx-proxy:rw
+    
   www:
     image: nginx
     restart: always
     expose:
       - "80"
     volumes:
-      - /Users/webexperto/tup-lc2-votacion-app:/usr/share/nginx/html:ro
+      - /home/marcelo/tupApp:/usr/share/nginx/html:ro
     environment:
-      - VIRTUAL_HOST=utnvote.app.com, www.utnvote.app.com
-      - LETSENCRYPT_HOST=utnvote.app.com, www.utnvote.app.com
+      - VIRTUAL_HOST=voteapp.marcelo.com, www.voteapp.marcelo.com
+      - LETSENCRYPT_HOST=voteapp.marcelo.com, www.voteapp.marcelo.com
       - LETSENCRYPT_EMAIL=marcelo.cepeda17@gmail.com
     depends_on:
       - nginx-proxy
       - letsencrypt
-volumes: 
-  certs:
-  html:
-  vhostd:
-  acme:
