@@ -42,3 +42,8 @@ services:
     depends_on:
       - nginx-proxy
       - letsencrypt
+volumes: 
+  certs:
+  html:
+  vhostd:
+  acme:
